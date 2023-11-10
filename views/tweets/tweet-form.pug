@@ -6,13 +6,13 @@ block content
       include ../includes/profile
     div(class="flex-fill")
       form(class="card" method="post" action="/api/tweets")
-        div(class="card-header") Ecrire un tweet
+        div(class="card-header") Écrire un tweet
         div(class="card-body")
           div(class="form-group")
-            textarea(class="form-control" name="content" placeholder="What is happening")
+            textarea(class="form-control" name="content" placeholder="Que se passe t'il!")
           if errors
             ul(class="my-2")
               each error in errors
                 li(class="text-danger")= error
           div(class="w-100")
-            input(type="submit" value="Send" class="btn btn-primary ms-auto d-block")
+            input(type="submit" value="Envoyer" class="btn btn-primary ms-auto mt-3 d-block")
