@@ -4,12 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "set NODE_ENV=development & nodemon app.js",
+    "start:prod": "set NODE_ENV=production & nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mathieu Enault",
   "license": "ISC",
   "dependencies": {
+    "errorhandler": "^1.5.1",
     "express": "^4.18.2",
     "mongoose": "^8.0.0",
     "morgan": "^1.10.0",

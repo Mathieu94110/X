@@ -5,14 +5,14 @@ block content
     div(class="profile-container")
       include ../includes/profile
     div(class="flex-fill")
-      form(class="card" method="post" action="/api/tweets")
-        div(class="card-header") Écrire un tweet
+      form(class="card" method="post" action= tweet._id ? "/tweets/update/" + tweet._id : "/tweets")
+        div(class="card-header") Ecrire un tweet
         div(class="card-body")
-          div(class="form-group")
-            textarea(class="form-control" name="content" placeholder="Que se passe t'il!")
+          div(class="mb-3")
+            textarea(class="form-control" name="content" placeholder="Que se passe t'il !")= tweet.content
           if errors
             ul(class="my-2")
               each error in errors
                 li(class="text-danger")= error
           div(class="w-100")
-            input(type="submit" value="Envoyer" class="btn btn-primary ms-auto mt-3 d-block")
+            input(type="submit" value="Envoyer" class="btn btn-primary ms-auto d-block")
