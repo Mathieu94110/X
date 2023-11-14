@@ -8,7 +8,7 @@ html(lang="en")
         link(rel="stylesheet" href="/css/main.css")
         script(src="https://unpkg.com/axios/dist/axios.min.js")
         title X
-    body 
+    body(class="vh-100 d-flex flex-column")
      include includes/topbar.pug
-     .container-fluid
+     div(class="container-fluid flex-grow-1")
        block content

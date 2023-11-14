@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose
+exports.clientPromise = mongoose
   .connect(
     "mongodb+srv://enaultmathieu2:me94110@cluster0.wt48ajo.mongodb.net/?retryWrites=true&w=majority"
   )
