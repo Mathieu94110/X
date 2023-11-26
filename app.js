@@ -6,7 +6,7 @@ const errorHandler = require("errorhandler");
 require("./database");
 
 const app = express();
-exports.app = app;
+module.exports = app;
 const port = process.env.PORT || 3000;
 
 app.set("views", path.join(__dirname, "views"));
