@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const { ensureAuthenticated } = require("../config/guards.config");
-const {
+import { Router } from "express";
+import { ensureAuthenticated } from "../config/guards.config";
+import {
   signup,
   signupForm,
   uploadImage,
@@ -8,7 +8,9 @@ const {
   userList,
   followUser,
   unFollowUser,
-} = require("../controllers/users.controller");
+} from "../controllers/users.controller";
+
+const router = Router();
 
 router.get("/", userList);
 router.get("/follow/:userId", followUser);
@@ -18,4 +20,4 @@ router.get("/signup/form", signupForm);
 router.post("/signup", signup);
 router.post("/update/image", ensureAuthenticated, uploadImage);
 
-module.exports = router;
+export default router;

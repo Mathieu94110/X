@@ -1,14 +1,19 @@
-const {
+import {
   createTweet,
   deleteTweet,
   getTweet,
   updateTweet,
   getCurrentUserTweetsWithFollowing,
-} = require("../queries/tweets.queries");
+} from "../queries/tweets.queries";
+import { Request, Response, NextFunction } from "express";
 
-exports.tweetList = async (req, res, next) => {
+export const tweetList = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const tweets = await getCurrentUserTweetsWithFollowing(req.user);
+    const tweets = await getCurrentUserTweetsWithFollowing(req.user!);
     res.render("tweets/tweet", {
       tweets,
       isAuthenticated: req.isAuthenticated(),
@@ -21,7 +26,7 @@ exports.tweetList = async (req, res, next) => {
   }
 };
 
-exports.tweetNew = (req, res, next) => {
+export const tweetNew = (req: Request, res: Response) => {
   res.render("tweets/tweet-form", {
     tweet: {},
     isAuthenticated: req.isAuthenticated(),
@@ -29,12 +34,12 @@ exports.tweetNew = (req, res, next) => {
   });
 };
 
-exports.tweetCreate = async (req, res, next) => {
+export const tweetCreate = async (req: Request, res: Response) => {
   try {
     const body = req.body;
-    await createTweet({ ...body, author: req.user._id });
+    await createTweet({ ...body, author: req.user!._id });
     res.redirect("/tweets");
-  } catch (e) {
+  } catch (e: any) {
     const errors = Object.keys(e.errors).map((key) => e.errors[key].message);
     res.status(400).render("tweets/tweet-form", {
       errors,
@@ -44,11 +49,15 @@ exports.tweetCreate = async (req, res, next) => {
   }
 };
 
-exports.tweetDelete = async (req, res, next) => {
+export const tweetDelete = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const tweetId = req.params.tweetId;
     await deleteTweet(tweetId);
-    const tweets = await getCurrentUserTweetsWithFollowing(req.user);
+    const tweets = await getCurrentUserTweetsWithFollowing(req.user!);
     res.render("tweets/tweet-list", {
       tweets,
       currentUser: req.user,
@@ -59,7 +68,11 @@ exports.tweetDelete = async (req, res, next) => {
   }
 };
 
-exports.tweetEdit = async (req, res, next) => {
+export const tweetEdit = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const tweetId = req.params.tweetId;
     const tweet = await getTweet(tweetId);
@@ -73,13 +86,13 @@ exports.tweetEdit = async (req, res, next) => {
   }
 };
 
-exports.tweetUpdate = async (req, res, next) => {
+export const tweetUpdate = async (req: Request, res: Response) => {
   const tweetId = req.params.tweetId;
   try {
     const body = req.body;
     await updateTweet(tweetId, body);
     res.redirect("/tweets");
-  } catch (e) {
+  } catch (e: any) {
     const errors = Object.keys(e.errors).map((key) => e.errors[key].message);
     const tweet = await getTweet(tweetId);
     res.status(400).render("tweets/tweet-form", {
